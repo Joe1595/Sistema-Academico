@@ -23,33 +23,36 @@
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", 
-      {
-        extend:"excel",
-        exportOptions:{
-          columns:':visible'
-        }
-      },
-      {
-        extend:"pdf",
-        exportOptions:{
-          columns:':visible'
-        }
-      }, "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv",
+                {
+                    extend: "excel",
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: "pdf",
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                }, "print", "colvis"
+            ]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
     });
-  });
 </script>
 @endsection
 
@@ -65,7 +68,7 @@
             </div>
             @endif
             <div class="card body">
-                   <!-- //example1 genera los datos de reportes -->
+                <!-- //example1 genera los datos de reportes -->
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -84,9 +87,45 @@
                             <td>{{ $per->nombres }} {{ $per->paterno }} {{ $per->materno }}</td>
                             <td>{{ $per->direccion }}</td>
                             <td>{{ $per->telefono }}</td>
-                            <td></td>
                             <td>
 
+                            </td>
+                            <td>
+
+
+                                <a href="{{route('asignacion_materias_personas', $per->id)}}" class="btn btn-outline-info">Asignar Materias</a>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPersonaAsig{{ $per->id }}">
+                                Asignar Materias
+                                </button>
+                                     <!--Modal--> 
+                                <div class="modal fade" id="modalPersonaAsig{{ $per->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="{{route('asignacion_materias_personas', $per->id)}}" method="get">
+                                            <div class="modal-body">
+                                                <label for="">Seleccionar Curso:</label>
+                                                <select name="curso_id" id="" class="form-control">
+                                                @foreach ($lista_cursos as $curso)
+                                                <option value="{{$curso->id}}">{{$curso->nombre}}</option>                                                    
+                                                @endforeach    
+                                                </select>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-primary">Asignar</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                           
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEditar{{ $per->id}}">
                                     <i class="fa fa-edit"></i>

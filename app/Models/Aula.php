@@ -10,6 +10,6 @@ class Aula extends Model
     use HasFactory;
     public function materias()
     {
-        return $this ->belongsToMany(Materia::class);
+        return $this->belongsToMany(Materia::class);
     }
 }

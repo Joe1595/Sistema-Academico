@@ -19,7 +19,7 @@ class Materia extends Model
     {
         return $this -> BelongsToMany(Aula::class);
     }
-    //N:M   una materia se le asigna a muchas materias
+    //N:M   una persona se le asigna a muchas materias
     public function personas()
     {
         return $this->belongsToMany(Persona::class);

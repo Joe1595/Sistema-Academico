@@ -150,29 +150,3 @@
 </div>
 
 @endsection
-<!-- @section("js")
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-  async function guardarMateria(curso_id) {
-    alert(curso_id);
-    var curso_id = curso_id;
-    var nombre = document.getElementById("nombre_mat" + curso_id).Value;
-    var sigla = document.getElementById("sigla_mat"+ curso_id).Value;
-    var descripcion = document.getElementById("descripcion_mat"+ curso_id).Value;
-    var bimestre = document.getElementById("bimestre_mat"+ curso_id).Value;
-
-    let obj = {
-      curso_id: curso_id,
-      nombre: nombre,
-      sigla: sigla,
-      descripcion: descripcion,
-      bimestre: bimestre
-    }
-    //peticion ajax con axios
-    const {data} = await axios.post("/admin/materia", obj);
-    if (data) {
-      alert("Materia Registrada");
-    }
-  }
-</script>
-@endsection -->

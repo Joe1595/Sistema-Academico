@@ -1,0 +1,24 @@
+1. Para trabajar con GIT necesitamos:
+- se necesita instalar git 
+-configurar
+crear una cuenta en git, github
+---------------------------------------------
+1.1 clonar repositorio
+
+1.2 iniciar un nuevo repositorio
+>git init
+
+2. agregar los archivos de la zona intermedia
++ git add .
+
+3. agregar del index al head
+> git commit -m "sisAcademico"
+
+
+4.1 crear un repositorio
+4.2  asignar un repositorio(github)  a nuestro rep local
+se ingresa el link  del repositorio de github
+git remote add origin https://github.com/Joe1595/Sistema-Academico.git
+
+5 subir los cambios al repositorio remoto
+git push -u origin  master

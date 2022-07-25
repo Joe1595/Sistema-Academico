@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Persona;
+use App\Models\Curso;
 
 class PersonaController extends Controller
 {
@@ -20,7 +22,8 @@ class PersonaController extends Controller
     {
         //
         $lista_personas = Persona::get();
-        return view("admin.persona.listado", compact("lista_personas"));
+        $lista_cursos=curso::get();
+        return view("admin.persona.listado", compact("lista_personas","lista_cursos"));
     }
 
     /**
@@ -118,5 +121,21 @@ class PersonaController extends Controller
         $persona = Persona::find($id);
         $persona->delete();
         return redirect()->back()->with("mensaje", "La persona ha sido eliminada");
+    }
+    public function asig_materias_persona(Request $request, $id)
+    {
+        $curso = Curso::find($request->curso_id);
+        $persona=Persona::find($id);
+        return view("admin.materia.asig_materias_persona", compact("curso", "persona"));
+
+    }
+    public function asignar(Request $request, $id)
+    {
+       // return $request;
+       //N:M
+       $persona=Persona::find($id);
+    $persona->materias()->attach($request->materias/*, ["periodo_id"=>$request->periodo_id]*/);
+
+       return redirect()->back();
     }
 }
