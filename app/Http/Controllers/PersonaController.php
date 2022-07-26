@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Persona;
 use App\Models\Curso;
+use App\Models\Periodo;
 
 class PersonaController extends Controller
 {
@@ -126,16 +127,16 @@ class PersonaController extends Controller
     {
         $curso = Curso::find($request->curso_id);
         $persona=Persona::find($id);
-        return view("admin.materia.asig_materias_persona", compact("curso", "persona"));
+        $periodo = Periodo::get();
+        return view("admin.materia.asig_materias_persona", compact("curso", "persona","periodo"));
 
     }
     public function asignar(Request $request, $id)
     {
-       // return $request;
+        return $request;
        //N:M
-       $persona=Persona::find($id);
-    $persona->materias()->attach($request->materias/*, ["periodo_id"=>$request->periodo_id]*/);
-
-       return redirect()->back();
+        $persona=Persona::find($id);
+        $persona->materias()->attach($request->materias, ["periodo_id"=>$request->periodo_id]);
+        return redirect()->back();
     }
 }

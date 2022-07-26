@@ -93,39 +93,77 @@
                             <td>
 
 
-                                <a href="{{route('asignacion_materias_personas', $per->id)}}" class="btn btn-outline-info">Asignar Materias</a>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPer{{$per->id}}">
+                                    Ver Materias
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="ModalPer{{$per->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Materias</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{$per->materias }}
+                                                <table class="table">
+                                                    <tr>
+                                                        <th>NOMBRE</th>
+                                                        <th>SIGLA</th>
+                                                        <th>BIMESTRE</th>
+                                                    </tr>
+                                                    @foreach ($per->materias as $materia)
+                                                    <tr>
+                                                        <th>{{$materia->nombre}}</th>
+                                                        <th>{{$materia->sigla}}</th>
+                                                        <th>{{$materia->bimestre}}</th>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPersonaAsig{{ $per->id }}">
-                                Asignar Materias
+                                    Asignar Materias
                                 </button>
-                                     <!--Modal--> 
+                                <!--Modal-->
                                 <div class="modal fade" id="modalPersonaAsig{{ $per->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Asignar Materias</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <form action="{{route('asignacion_materias_personas', $per->id)}}" method="get">
-                                            <div class="modal-body">
-                                                <label for="">Seleccionar Curso:</label>
-                                                <select name="curso_id" id="" class="form-control">
-                                                @foreach ($lista_cursos as $curso)
-                                                <option value="{{$curso->id}}">{{$curso->nombre}}</option>                                                    
-                                                @endforeach    
-                                                </select>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary">Asignar</button>
-                                            </div>
+                                                <div class="modal-body">
+                                                    <label for="">Seleccionar Curso:</label>
+                                                    <select name="curso_id" id="" class="form-control">
+                                                        @foreach ($lista_cursos as $curso)
+                                                        <option value="{{$curso->id}}">{{$curso->nombre}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" class="btn btn-primary">Asignar</button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                           
+
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEditar{{ $per->id}}">
                                     <i class="fa fa-edit"></i>
